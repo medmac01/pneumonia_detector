@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+{% block content %}
+<body>
+    <!-- navbar -->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <img class="navbar-brand" src="{{url_for('static',filename='logo.png')}}">
+                <a class="navbar-brand" href="index.php" style="color: #fff;font-weight: 800;">Pneumonia Detector</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="index.php">Home</a></li>
+                <li><a href="about.php">About</a></li>
+                <li><a href="contact.php">Contact</a></li>
+            </ul>
+        </div>
+
+    </nav>
+
+    <div class="container">
+        <div class="row justify-content-evenly">
+            <div class="col-lg-6" style="padding-top: 5rem; padding-bottom: 5rem;">
+                <h1 style="
+                font-family: 'visby';
+                font-weight: bolder;
+                font-size: 5em;
+                padding-bottom: 2rem;">Welcome back!</h1>
+
+                <p class="" style="
+                font-family: 'visby';
+                font-weight: normal;
+                font-size: x-large;
+                color: #114B5F;
+                padding-bottom: 5rem;">
+                    An online pneumonia detection system, which can detect pneumonia in a patient from his chest x-ray. Based on <img src="{{url_for('static',filename='tf.png')}}" alt="Tensorflow" style="width: 2.5rem;"> and Keras.
+                </p>
+
+                <a href="login.php" class="btn add-btn">+</a>
+                <p style="font-weight: lighter; color: gray; font-size: medium; padding-top: .5rem;">Add your x-ray scan here 👆🏻</p>
+                
+                <button class="btn btn-primary" style="margin-top: 2rem;">
+                    <a href="{{url_for('predict')}}" style="color: #fff;">Predict</a>
+            </div>
+            <div class="col-lg-6">
+                <img class="" style="width: 100%;" src="{{url_for('static',filename='lung_illustration.png')}}">
+            </div>
+            <!-- <div class="col-sm-4">
+                <h3>Column 3</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+            </div> -->
+        </div>
+    </div>
+
+</body>
+{% endblock %}
+

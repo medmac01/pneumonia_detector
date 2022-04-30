@@ -1,10 +1,12 @@
-from flask import Flask
+from flask import Flask, url_for, render_template
 
-def create_app():
-	app = Flask(__name__)
-	
-	@app.route('/test')
-	def test():
-		return "Hello World"
-	return app
 
+app = Flask(__name__)
+
+@app.route('/')
+def welcome():
+    return render_template("welcome.html")
+
+@app.route('/predict')
+def predict():
+	return render_template("predict.html")
