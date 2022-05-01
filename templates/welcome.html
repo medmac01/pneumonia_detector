@@ -17,6 +17,15 @@
 
     </nav>
 
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }}" style="width: fit-content;">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
     <div class="container">
         <div class="row justify-content-evenly">
             <div class="col-lg-6" style="padding-top: 5rem; padding-bottom: 5rem;">
@@ -34,15 +43,15 @@
                 padding-bottom: 5rem;">
                     An online pneumonia detection system, which can detect pneumonia in a patient from his chest x-ray. Based on <img src="{{url_for('static',filename='tf.png')}}" alt="Tensorflow" style="width: 2.5rem;"> and Keras.
                 </p>
+                <form enctype="multipart/form-data" action="" method="post">
+                    {{ form.uploadedFile(id="file", class="btn add-btn") }} 
+                    <p style="font-weight: lighter; color: gray; font-size: medium; padding-top: .5rem;">Add your x-ray scan here 👆🏻</p>
+                        {{form.submit(class="btn btn-primary", style="margin-top: 2rem;", value="Predict")}}
+                </form>
 
-                <a href="login.php" class="btn add-btn">+</a>
-                <p style="font-weight: lighter; color: gray; font-size: medium; padding-top: .5rem;">Add your x-ray scan here 👆🏻</p>
-                
-                <button class="btn btn-primary" style="margin-top: 2rem;">
-                    <a href="{{url_for('predict')}}" style="color: #fff;">Predict</a>
             </div>
             <div class="col-lg-6">
-                <img class="" style="width: 100%;" src="{{url_for('static',filename='lung_illustration.png')}}">
+                <img class="" style="width: 120%;" src="{{url_for('static',filename='lung_illustration.png')}}">
             </div>
             <!-- <div class="col-sm-4">
                 <h3>Column 3</h3>
