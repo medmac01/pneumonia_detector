@@ -1,8 +1,3 @@
-from crypt import methods
-from distutils import file_util
-from fileinput import filename
-
-from nis import cat
 from flask import Flask, url_for, render_template, flash, request, redirect
 from forms import uploadScanForm
 import os
@@ -49,7 +44,8 @@ import tensorflow as tf
 import numpy as np
 
 def load_trained_model():
-	model = tf.keras.models.load_model(os.getcwd()+"/model/cnnmodel.h5")
+	model = tf.keras.models.load_model(os.getcwd()+"/model/model.h5")
+	# flash(model.summary())
 	# model.set_weights(os.getcwd()+'/model/final_weights.h5')
 	return model
 
@@ -65,7 +61,11 @@ def preprocess_image(filename):
 
 def predict_class(img, model):
 	prediction = model.predict(img)
-	return tf.keras.applications.imagenet_utils.decode_predictions(prediction, top=1)[0]
+	if prediction[0][0] == 1:
+		return "Pneumonia"
+	else:
+		return redirect(url_for('static',filename='ju.jpeg'))
+
 
 
 
