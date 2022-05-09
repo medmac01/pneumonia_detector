@@ -20,7 +20,7 @@
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
         {% for category, message in messages %}
-            <div class="alert alert-{{ category }}" style="width: fit-content;">
+            <div class="alert alert-{{ category }}" style="margin-left:4rem; width: fit-content;">
                 {{ message }}
             </div>
         {% endfor %}
@@ -45,7 +45,7 @@
                 </p>
                 <form enctype="multipart/form-data" action="" method="post">
                     {{ form.uploadedFile(id="file", class="btn add-btn") }} 
-                    <p style="font-weight: lighter; color: gray; font-size: medium; padding-top: .5rem;">Add your x-ray scan here 👆🏻</p>
+                    <p id="msg" style="font-weight: lighter; color: gray; font-size: medium; padding-top: .5rem;">Add your x-ray scan here 👆🏻</p>
                         {{form.submit(class="btn btn-primary", style="margin-top: 2rem;", value="Predict")}}
                 </form>
 

@@ -1,3 +1,4 @@
+from django.shortcuts import render
 from flask import Flask, url_for, render_template, flash, request, redirect
 from forms import uploadScanForm
 import os
@@ -6,7 +7,7 @@ app = Flask(__name__)
 app.config["SECRET_KEY"] = "f3d2e1a3218a034b3d3ff21c"
 
 ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg"}
-UPLOAD_FOLDER = os.getcwd() + '/database/'
+UPLOAD_FOLDER = os.getcwd() + '/static/database/'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 def allowed_file(filename):
@@ -23,7 +24,7 @@ def welcome():
 		uploaded_file = request.files[form.uploadedFile.name]
 		if uploaded_file.filename != '':
 			uploaded_file.save(os.path.join(UPLOAD_FOLDER,uploaded_file.filename))
-			flash("File uploaded successfully!",category="success")
+			flash("✅ File uploaded successfully!",category="success")
 		# file = request.files['file']
 			return redirect(url_for("process",file=uploaded_file.filename))
 
@@ -35,7 +36,11 @@ def process():
 	file = request.args.get("file")
 	model = load_trained_model()
 	img_preprocessed = preprocess_image(file)
-	return predict_class(img_preprocessed,model)
+	result = predict_class(img_preprocessed,model)
+	if result == "pneumonia":
+		return render_template('predict.html',prediction="pneumonia",filename=file)
+	elif result == "normal":
+		return render_template('predict.html',prediction="normal",filename=file)
 	
 	
 
@@ -62,11 +67,13 @@ def preprocess_image(filename):
 def predict_class(img, model):
 	prediction = model.predict(img)
 	if prediction[0][0] == 1:
-		return "Pneumonia"
+		return "pneumonia"
 	else:
-		return redirect(url_for('static',filename='ju.jpeg'))
+		return "normal"
 
-
+@app.route('/tmp')
+def tmp():
+	return render_template('predict.html')
 
 
 
