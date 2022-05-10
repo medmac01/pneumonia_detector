@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from flask import Flask, url_for, render_template, flash, request, redirect
 from forms import uploadScanForm
 import os
