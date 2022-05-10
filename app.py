@@ -6,7 +6,12 @@ app = Flask(__name__)
 app.config["SECRET_KEY"] = "f3d2e1a3218a034b3d3ff21c"
 
 ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg"}
-UPLOAD_FOLDER = os.getcwd() + '/static/database/'
+
+if os.getcwd() == "/app":
+	UPLOAD_FOLDER = '/static/database/'
+else:
+	UPLOAD_FOLDER = os.getcwd() + '/static/database/'
+
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 def allowed_file(filename):
