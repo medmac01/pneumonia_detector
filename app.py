@@ -29,7 +29,7 @@ def welcome():
 		uploaded_file = request.files[form.uploadedFile.name]
 		if uploaded_file.filename != '':
 			uploaded_file.save(os.path.join(UPLOAD_FOLDER,uploaded_file.filename))
-			flash("✅ File uploaded successfully!",category="success")
+			flash("File uploaded successfully!",category="success")
 		# file = request.files['file']
 			return redirect(url_for("process",file=uploaded_file.filename))
 
