@@ -2,4 +2,5 @@ import app
  
 if __name__ == "__main__":
         
-        app.app.run(port=8001)
+        app.app.run(host=os.getenv('IP', '0.0.0.0'), 
+            port=int(os.getenv('PORT', 4444)))
